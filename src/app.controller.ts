@@ -9,7 +9,7 @@ export class AppController {
   getHello(): string {
     return this.appService.getHello();
   }
-  @Get("/send-back")
+  @Get('/send-back')
   getSendBack(): string {
     return this.appService.getSendBack();
   }

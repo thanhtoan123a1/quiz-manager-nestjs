@@ -1,4 +1,4 @@
-import { Quiz } from './quiz.entity';
+import { Quiz } from '../entities/quiz.entity';
 import { EntityRepository, Repository } from 'typeorm';
 
 @EntityRepository(Quiz)

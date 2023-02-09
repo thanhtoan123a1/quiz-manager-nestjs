@@ -1,10 +1,12 @@
-import { CreateQuizDto } from './dto/CreateQuiz.dto';
-import { QuizService } from './quiz.service';
+import { CreateQuizDto } from '../dto/create-quiz.dto';
+import { QuizService } from '../services/quiz.service';
 import {
   Body,
   Controller,
   Get,
   HttpCode,
+  Param,
+  ParseIntPipe,
   Post,
   UsePipes,
   ValidationPipe,
@@ -18,9 +20,13 @@ export class QuizController {
     return this.quizService.getAllQuiz();
   }
 
+  @Get('/:id')
+  async getQuizById(@Param('id', ParseIntPipe) id: number) {
+    return await this.quizService.getQuizById(id);
+  }
+
   @Post('/create')
   @UsePipes(ValidationPipe)
-  @HttpCode(200)
   async createQuiz(@Body() quizData: CreateQuizDto) {
     return await this.quizService.createNewQuiz(quizData);
   }

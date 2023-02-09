@@ -4,7 +4,6 @@ import {
   Body,
   Controller,
   Get,
-  HttpCode,
   Param,
   ParseIntPipe,
   Post,
@@ -16,8 +15,8 @@ import {
 export class QuizController {
   constructor(private quizService: QuizService) {}
   @Get('/')
-  getAllQuiz() {
-    return this.quizService.getAllQuiz();
+  async getAllQuiz() {
+    return await this.quizService.getAllQuiz();
   }
 
   @Get('/:id')

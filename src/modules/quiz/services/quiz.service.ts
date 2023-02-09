@@ -1,3 +1,4 @@
+import { Question } from './../entities/question.entity';
 import { Quiz } from './../entities/quiz.entity';
 import { CreateQuizDto } from '../dto/create-quiz.dto';
 import { Injectable } from '@nestjs/common';
@@ -10,8 +11,12 @@ export class QuizService {
     @InjectRepository(QuizRepository) private quizRepository: QuizRepository,
   ) {}
 
-  getAllQuiz(): Array<number> {
-    return [1, 2, 3, 4, 5];
+  async getAllQuiz(): Promise<Quiz[]> {
+    return await this.quizRepository
+      .createQueryBuilder('q')
+      .leftJoinAndSelect('q.questions', 'qt', 'q.id = qt.quizId')
+      .leftJoinAndSelect('qt.options', 'o', 'qt.id = o.questionId')
+      .getMany();
   }
 
   async getQuizById(id: number): Promise<Quiz> {

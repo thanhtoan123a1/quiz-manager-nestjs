@@ -8,6 +8,6 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
   password: 'mysecretpassword',
   database: 'quiz',
   entities: [__dirname + '/../**/*.entity{.ts,.js}'],
-  // autoLoadEntities: true,
-  synchronize: true,
+  synchronize: false,
+  logging: true,
 };
